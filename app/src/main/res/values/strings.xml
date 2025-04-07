@@ -3,4 +3,7 @@
     <string name="howToLogin">Ingrese su usuario y contraseña para continuar</string>
     <string name="recover_password">¿NO RECUERDA SU CONTRASEÑA? <font color='#FF0000'>CLICK AQUI</font>.</string>
     <string name="signup_instead">SI NO TIENE CUENTA <font color='#FF0000'>REGISTRESE</font>.</string>
+    <string name="howToRegister">Cree su usuario con su email</string>
+    <string name="terms">Al crear su cuenta usted esta aceptando nuestros términos y condiciones.</string>
+    <string name="login_instead">¿YA TIENE CUENTA? <font color='#FF0000'>CLICK AQUI PARA INGRESAR.</font></string>
 </resources>

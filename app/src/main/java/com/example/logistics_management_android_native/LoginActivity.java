@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.logistics_management_android_native.auth.RegisterActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,8 +22,6 @@ import java.util.Objects;
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private Button loginButton;
-
 
 
     @Override
@@ -34,10 +33,11 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         EditText usernameEditText = findViewById(R.id.emailEditText);
         EditText passwordEditText = findViewById(R.id.passwordEditText);
-        loginButton = findViewById(R.id.loginButton);
-
+        Button loginButton = findViewById(R.id.loginButton);
+        TextView registerButton = findViewById(R.id.registerText);
 
         loginButton.setOnClickListener(view -> loginUser());
+        registerButton.setOnClickListener(view -> register());
     }
     private void loginUser() {
         EditText emailEditText = findViewById(R.id.emailEditText);
@@ -62,5 +62,9 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(this, "Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void register() {
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 }

@@ -4,13 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.logistics_management_android_native.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.example.logistics_management_android_native.R;
-import com.example.logistics_management_android_native.auth.LoginActivity;
+
+import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -23,13 +27,15 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
-        etEmail = findViewById(R.id.editTextTextEmailAddress);
-        etPassword = findViewById(R.id.editTextTextPassword);
-        btnRegister = findViewById(R.id.button);
+        EditText usernameEditText = findViewById(R.id.emailEditText);
+        EditText passwordEditText = findViewById(R.id.passwordEditText);
+        Button registerButton = findViewById(R.id.registerButton);
+        TextView loginButton = findViewById(R.id.loginText);
 
-        btnRegister.setOnClickListener(v -> {
-            String email = etEmail.getText().toString().trim();
-            String password = etPassword.getText().toString().trim();
+        loginButton.setOnClickListener(view -> login());
+        registerButton.setOnClickListener(v -> {
+            String email = usernameEditText.getText().toString().trim();
+            String password = passwordEditText.getText().toString().trim();
 
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(RegisterActivity.this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
@@ -38,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             registrarUsuario(email, password);
         });
+
     }
 
     private void registrarUsuario(String email, String password) {
@@ -49,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
                             user.sendEmailVerification().addOnCompleteListener(task1 -> {
                                 if (task1.isSuccessful()) {
                                     Toast.makeText(RegisterActivity.this, "Verificación enviada. Revisa tu correo.", Toast.LENGTH_LONG).show();
-                                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                    login();
                                     finish();
                                 } else {
                                     Toast.makeText(RegisterActivity.this, "Error al enviar el correo de verificación", Toast.LENGTH_SHORT).show();
@@ -57,8 +64,12 @@ public class RegisterActivity extends AppCompatActivity {
                             });
                         }
                     } else {
-                        Toast.makeText(this, "Error en el registro: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Error en el registro: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void login(){
+        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
     }
 }
