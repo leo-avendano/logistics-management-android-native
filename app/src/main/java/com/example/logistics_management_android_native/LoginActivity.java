@@ -55,9 +55,16 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
-                        // Redirigir a HomeActivity
-                        startActivity(new Intent(this, HomeActivity.class));
-                        finish();
+                        if(user != null && user.isEmailVerified()) {
+                            // Redirigir a HomeActivity
+                            startActivity(new Intent(this, HomeActivity.class));
+                            finish();
+                        } else {
+                            // Usuario no verificado por mail
+                            Toast.makeText(this, "Debe verificar su correo electrónico antes de ingresar", Toast.LENGTH_LONG).show();
+                            mAuth.signOut();
+                        }
+
                     } else {
                         Toast.makeText(this, "Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                     }
