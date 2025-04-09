@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Logistics-management-android-native</string>
+    <string name="historial_de_rutas">HISTORIAL DE RUTAS</string>
 </resources>

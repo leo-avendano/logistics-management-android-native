@@ -33,7 +33,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -45,4 +44,5 @@ dependencies {
     implementation(libs.google.firebase.auth)
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
 }
