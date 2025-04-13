@@ -17,9 +17,9 @@
             android:id="@+id/logoImage"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/de_remate"
             android:layout_marginTop="28dp"
-            android:contentDescription="Logo" />
+            android:contentDescription="Logo"
+            android:src="@drawable/de_remate" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,10 +32,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:text="REGISTRO"
-            android:textStyle="bold"
             android:textSize="20sp"
-            android:layout_marginTop="24dp" />
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -75,6 +75,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Contraseña"
+                android:background="@drawable/edit_text_background"
+                android:inputType="textPassword"
+                android:padding="12dp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="8dp">
+
+            <EditText
+                android:id="@+id/confirmPasswordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint= "Confirme la contraseña"
                 android:background="@drawable/edit_text_background"
                 android:inputType="textPassword"
                 android:padding="12dp" />

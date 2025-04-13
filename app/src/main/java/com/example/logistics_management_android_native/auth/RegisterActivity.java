@@ -18,7 +18,7 @@ import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    private EditText etEmail, etPassword;
+    private EditText etEmail, etPassword, erConfirmPassword;
     private Button btnRegister;
 
     @Override
@@ -29,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         EditText usernameEditText = findViewById(R.id.emailEditText);
         EditText passwordEditText = findViewById(R.id.passwordEditText);
+        EditText confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText);
         Button registerButton = findViewById(R.id.registerButton);
         TextView loginButton = findViewById(R.id.loginText);
 
@@ -36,37 +37,62 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(v -> {
             String email = usernameEditText.getText().toString().trim();
             String password = passwordEditText.getText().toString().trim();
+            String confirmPassword = confirmPasswordEditText.getText().toString().trim();
 
-            if (email.isEmpty() || password.isEmpty()) {
+            if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 Toast.makeText(RegisterActivity.this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            registrarUsuario(email, password);
+            registrarUsuario(email, password, confirmPassword);
         });
 
     }
 
-    private void registrarUsuario(String email, String password) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        if (user != null) {
-                            user.sendEmailVerification().addOnCompleteListener(task1 -> {
-                                if (task1.isSuccessful()) {
-                                    Toast.makeText(RegisterActivity.this, "Verificación enviada. Revisa tu correo.", Toast.LENGTH_LONG).show();
-                                    login();
-                                    finish();
+    private void registrarUsuario(String email, String password, String confirmPassword) {
+
+        if (isValidEmail(email)) { // anda medio medio
+            if(isPasswordSecure(password)) {
+                if (password.equals(confirmPassword)) {
+                    mAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(this, task -> {
+                                if (task.isSuccessful()) {
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    if (user != null) {
+                                        user.sendEmailVerification().addOnCompleteListener(task1 -> {
+                                            if (task1.isSuccessful()) {
+                                                Toast.makeText(RegisterActivity.this, "Verificación enviada. Revisa tu correo.", Toast.LENGTH_LONG).show();
+                                                login();
+                                                finish();
+
+                                            } else {
+                                                Toast.makeText(RegisterActivity.this, "Error al enviar el correo de verificación", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
                                 } else {
-                                    Toast.makeText(RegisterActivity.this, "Error al enviar el correo de verificación", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(this, "Error en el registro: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
-                        }
-                    } else {
-                        Toast.makeText(this, "Error en el registro: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                }
+
+                else Toast.makeText(this, "Las contraseñas ingresadas no coinciden", Toast.LENGTH_SHORT).show();
+            }
+            else Toast.makeText(this, "La contraseña no es segura", Toast.LENGTH_SHORT).show();
+        }
+        else Toast.makeText(this, "El correo es inválido", Toast.LENGTH_SHORT).show();
+
+
+
+    }
+
+    private boolean isValidEmail(String email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    private boolean isPasswordSecure(String password) {
+        String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!?.*()_\\-]).{8,}$";
+        return password.matches(passwordPattern);
     }
 
     private void login(){
