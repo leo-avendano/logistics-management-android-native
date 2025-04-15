@@ -2,8 +2,10 @@ package com.example.logistics_management_android_native.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,9 @@ public class RegisterActivity extends AppCompatActivity {
         EditText confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText);
         Button registerButton = findViewById(R.id.registerButton);
         TextView loginButton = findViewById(R.id.loginText);
+        ImageButton eyeIcon = findViewById(R.id.eyeIcon);
+        ImageButton eyeIconConfirm = findViewById(R.id.eyeIconConfirm);
+
 
         loginButton.setOnClickListener(view -> login());
         registerButton.setOnClickListener(v -> {
@@ -46,6 +51,11 @@ public class RegisterActivity extends AppCompatActivity {
 
             registrarUsuario(email, password, confirmPassword);
         });
+
+        //cambiar visualización de contraseña
+        eyeIcon.setOnClickListener(v -> {cambiarVistaPassword(passwordEditText); });
+
+        eyeIconConfirm.setOnClickListener(v -> {cambiarVistaPassword(confirmPasswordEditText);});
 
     }
 
@@ -93,6 +103,16 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean isPasswordSecure(String password) {
         String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!?.*()_\\-]).{8,}$";
         return password.matches(passwordPattern);
+    }
+
+    private void cambiarVistaPassword(EditText password) {
+        if (password.getInputType() == (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)) {
+            // Muestra la contraseña
+            password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+        } else {
+            // Oculta la contraseña
+            password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        }
     }
 
     private void login(){
