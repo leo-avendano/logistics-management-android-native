@@ -15,7 +15,7 @@
 
         <!-- actividad principal -->
         <activity
-            android:name=".auth.LoginActivity"
+            android:name=".homescreen.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +25,7 @@
         </activity>
         <activity android:name=".auth.RegisterActivity"></activity>
         <activity android:name=".MainActivity"></activity>
+        <activity android:name=".history.HistoryActivity"></activity>
     </application>
 
 </manifest>

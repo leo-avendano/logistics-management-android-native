@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="horizontalRadioButtonHomeScreen" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:button">@null</item>
+        <item name="android:paddingHorizontal">14dp</item>
+        <item name="android:paddingVertical">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:minHeight">36dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="horizontalRadioButtonHomeScreen.Selected" parent="horizontalRadioButtonHomeScreen">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/radio_dark_background</item>
+    </style>
+
+    <style name="horizontalRadioButtonHomeScreen.NoSelected" parent="horizontalRadioButtonHomeScreen">
+        <item name="android:textColor">@color/yellow</item>
+        <item name="android:background">@drawable/radio_yellow_background</item>
+    </style>
+
+    <style name="buttonRuteDetails">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/btn_dark_background</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+</resources>
