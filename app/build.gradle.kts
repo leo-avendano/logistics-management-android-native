@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services")
+    id("com.google.dagger.hilt.android") version "2.48"
 }
 
 android {
@@ -50,4 +51,11 @@ dependencies {
     implementation("com.google.android.material:material:1.4.0")
     compileOnly(libs.lombok)
     annotationProcessor(libs.lombok)
+
+    // Security Crypto
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
+
+    // Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.48")
+    annotationProcessor("com.google.dagger:hilt-android-compiler:2.48")
 }

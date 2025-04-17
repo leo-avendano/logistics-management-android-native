@@ -51,14 +51,14 @@
             android:textColor="@color/white"/>
 
         <Button
-            android:id="@+id/nav_settings"
+            android:id="@+id/nav_logout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_columnWeight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/ic_settings"
-            android:text="Ajustes"
-            android:textColor="@color/white"/>
+            android:text="Logout"
+            android:textColor="@color/white" />
     </GridLayout>
 
     <ImageButton

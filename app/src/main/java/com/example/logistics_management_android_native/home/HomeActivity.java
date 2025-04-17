@@ -34,15 +34,15 @@ public class HomeActivity extends AppCompatActivity implements RuteViewAdapter.O
     }
 
     private void loadSampleData() {
-        ruteList.add(Rute.builder()
-                .uuid("123ABC")
-                .estado("Disponible")
-                .build());
-
-        ruteList.add(Rute.builder()
-                .uuid("123ABD")
-                .estado("Pendiente")
-                .build());
+//        ruteList.add(Rute.builder()
+//                .uuid("123ABC")
+//                .estado("Disponible")
+//                .build());
+//
+//        ruteList.add(Rute.builder()
+//                .uuid("123ABD")
+//                .estado("Pendiente")
+//                .build());
     }
 
     @Override
