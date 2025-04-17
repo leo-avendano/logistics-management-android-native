@@ -1,46 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:fitsSystemWindows="true"
-    >
-
-
+    android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/linearLayoutTittle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:paddingHorizontal="18dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            style="@style/TextTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_textview"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/rutas_de_hoy" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutOption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="0dp"
-        android:gravity="center"
-        android:layout_gravity="center">
+        android:paddingHorizontal="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutTittle">
 
-
-
-        <ImageView
-            android:id="@+id/logoImage"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/de_remate"
-            android:layout_marginTop="28dp"
-            android:contentDescription="Logo" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <HorizontalScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="DeRemate"
-            android:textStyle="bold"
-            android:textSize="24sp"
-            android:layout_marginTop="0dp" />
+            android:scrollbars="none"
+            android:fillViewport="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleTextView">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bienvenido!"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_marginTop="24dp" />
+            <RadioGroup
+                android:id="@+id/radioGroupFiltro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="2dp">
 
+                <RadioButton
+                    android:id="@+id/radioTodas"
+                    style="@style/horizontalRadioButtonHomeScreen.Selected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Todas"
+                    tools:ignore="HardcodedText"/>
+
+                <RadioButton
+                    android:id="@+id/radioDisponible"
+                    style="@style/horizontalRadioButtonHomeScreen.NoSelected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Disponible"
+                    tools:ignore="HardcodedText"/>
+
+                <RadioButton
+                    android:id="@+id/radioPendiente"
+                    style="@style/horizontalRadioButtonHomeScreen.NoSelected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pendiente"
+                    tools:ignore="HardcodedText" />
+
+                <RadioButton
+                    android:id="@+id/radioEnCurso"
+                    style="@style/horizontalRadioButtonHomeScreen.NoSelected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="En Curso"
+                    tools:ignore="HardcodedText" />
+            </RadioGroup>
+        </HorizontalScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewRutes"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="8dp" />
     </LinearLayout>
-</ScrollView>
+
+    <include
+        android:id="@+id/navbar_menu"
+        layout="@layout/navbar_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
