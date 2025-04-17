@@ -26,6 +26,7 @@ public class HomeActivity extends AppCompatActivity implements RuteViewAdapter.O
 
         View navbar = findViewById(R.id.navbar_menu);
         NavbarHelper.setupNavbar(navbar, this);
+
         loadSampleData();
         adapter = new RuteViewAdapter(ruteList);
         adapter.setOnItemClickListener(this);

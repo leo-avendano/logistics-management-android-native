@@ -4,13 +4,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="30dp">
+
+    <View
+        android:id="@+id/topLine"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@android:color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
 
     <LinearLayout
         android:id="@+id/linearLayoutTittle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:paddingHorizontal="18dp"
         android:paddingTop="12dp"
         android:paddingBottom="4dp"
@@ -96,7 +105,8 @@
             android:id="@+id/recyclerViewRutes"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
 
     <include

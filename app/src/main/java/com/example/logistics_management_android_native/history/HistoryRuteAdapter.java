@@ -11,10 +11,10 @@ import java.util.List;
 
 import com.example.logistics_management_android_native.model.PackageHistory;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+public class HistoryRuteAdapter extends RecyclerView.Adapter<HistoryRuteAdapter.ViewHolder> {
     private final List<PackageHistory> items;
 
-    public Adapter(List<PackageHistory> items) {
+    public HistoryRuteAdapter(List<PackageHistory> items) {
         this.items = items;
     }
 

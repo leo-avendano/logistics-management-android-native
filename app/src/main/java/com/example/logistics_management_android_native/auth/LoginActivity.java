@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.logistics_management_android_native.HomeActivity;
+import com.example.logistics_management_android_native.home.HomeActivity;
 import com.example.logistics_management_android_native.R;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;

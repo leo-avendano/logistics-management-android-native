@@ -1,8 +1,11 @@
 package com.example.logistics_management_android_native.history;
 
 import com.example.logistics_management_android_native.R;
+import com.example.logistics_management_android_native.components.NavbarHelper;
 import com.example.logistics_management_android_native.model.PackageHistory; // Adjust the import based on your package structure
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,7 +13,7 @@ import java.util.ArrayList;
 
 public class HistoryActivity extends AppCompatActivity {
 
-    private Adapter adapter;
+    private HistoryRuteAdapter adapter;
     private ArrayList<PackageHistory> packageList;
 
     @Override
@@ -20,7 +23,10 @@ public class HistoryActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         packageList = new ArrayList<>();
-        adapter = new Adapter(packageList);
+        adapter = new HistoryRuteAdapter(packageList);
+
+        View navbar = findViewById(R.id.navbar_menu);
+        NavbarHelper.setupNavbar(navbar, this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
