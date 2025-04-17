@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-
 import com.example.logistics_management_android_native.R;
 import com.example.logistics_management_android_native.auth.AuthActivity;
 import com.example.logistics_management_android_native.history.HistoryActivity;
