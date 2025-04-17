@@ -1,11 +1,12 @@
-package com.example.logistics_management_android_native.homescreen;
+package com.example.logistics_management_android_native.home;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.logistics_management_android_native.R;
+import com.example.logistics_management_android_native.components.NavbarHelper;
 import com.example.logistics_management_android_native.model.Rute;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +24,9 @@ public class HomeActivity extends AppCompatActivity implements RuteViewAdapter.O
         recyclerView = findViewById(R.id.recyclerViewRutes);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        View navbar = findViewById(R.id.navbar_menu);
+        NavbarHelper.setupNavbar(navbar, this);
         loadSampleData();
-
         adapter = new RuteViewAdapter(ruteList);
         adapter.setOnItemClickListener(this);
         recyclerView.setAdapter(adapter);
@@ -44,15 +46,11 @@ public class HomeActivity extends AppCompatActivity implements RuteViewAdapter.O
 
     @Override
     public void onItemClick(Rute rute) {
-//        Intent intent = new Intent(this, RuteActivity.class);
-//        intent.putExtra("UUID", rute.getUuid());
-//        startActivity(intent);
+
     }
 
     @Override
     public void onDetailsClick(Rute rute) {
-//        Intent intent = new Intent(this, DetalleActivity.class);
-//        intent.putExtra("UUID", rute.getUuid());
-//        startActivity(intent);
+
     }
 }

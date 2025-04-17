@@ -1,4 +1,4 @@
-package com.example.logistics_management_android_native.homescreen;
+package com.example.logistics_management_android_native.home;
 
 import com.example.logistics_management_android_native.model.Rute;
 import com.example.logistics_management_android_native.R;

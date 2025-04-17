@@ -12,10 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Logisticsmanagementandroidnative"
         tools:targetApi="31">
-
-        <!-- actividad principal -->
         <activity
-            android:name=".homescreen.HomeActivity"
+            android:name=".auth.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,9 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".auth.RegisterActivity"></activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".history.HistoryActivity"></activity>
+        <activity android:name=".auth.RegisterActivity" />
+        <activity android:name=".home.HomeActivity" />
+        <activity android:name=".history.HistoryActivity"/>
+
     </application>
 
 </manifest>
