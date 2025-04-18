@@ -11,4 +11,6 @@
     <string name="howToRegister">Cree su usuario con su email</string>
     <string name="terms">Al crear su cuenta usted esta aceptando nuestros términos y condiciones.</string>
     <string name="login_instead">¿YA TIENE CUENTA? <font color='#FF0000'>CLICK AQUI PARA INGRESAR.</font></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -7,15 +7,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.logistics_management_android_native.R;
 import com.example.logistics_management_android_native.components.NavbarHelper;
-import com.example.logistics_management_android_native.model.Rute;
+import com.example.logistics_management_android_native.model.Route;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity implements RuteViewAdapter.OnItemClickListener {
+public class HomeActivity extends AppCompatActivity implements RouteViewAdapter.OnItemClickListener {
 
     private RecyclerView recyclerView;
-    private RuteViewAdapter adapter;
-    private List<Rute> ruteList = new ArrayList<>();
+    private RouteViewAdapter adapter;
+    private List<Route> routeList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class HomeActivity extends AppCompatActivity implements RuteViewAdapter.O
         NavbarHelper.setupNavbar(navbar, this);
 
         loadSampleData();
-        adapter = new RuteViewAdapter(ruteList);
+        adapter = new RouteViewAdapter(routeList);
         adapter.setOnItemClickListener(this);
         recyclerView.setAdapter(adapter);
     }
@@ -46,12 +46,12 @@ public class HomeActivity extends AppCompatActivity implements RuteViewAdapter.O
     }
 
     @Override
-    public void onItemClick(Rute rute) {
+    public void onItemClick(Route route) {
 
     }
 
     @Override
-    public void onDetailsClick(Rute rute) {
+    public void onDetailsClick(Route route) {
 
     }
 }

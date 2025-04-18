@@ -13,7 +13,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Rute {
+public class Route {
     private String uuid;
     private String cliente;
     private String repartidorUserID;
