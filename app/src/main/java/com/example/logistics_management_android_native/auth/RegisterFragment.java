@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.text.InputType;
 
 import androidx.annotation.NonNull;
@@ -19,15 +18,14 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.logistics_management_android_native.R;
 import com.example.logistics_management_android_native.utils.ToastMessage;
+import com.example.logistics_management_android_native.utils.ToastUtil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterFragment extends Fragment {
-
     private FirebaseAuth mAuth;
     private EditText emailEditText, passwordEditText, confirmPasswordEditText;
-
-    // Constructor
+    private ToastUtil toast;
     public RegisterFragment() {}
 
     @Nullable
@@ -38,6 +36,7 @@ public class RegisterFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
         mAuth = FirebaseAuth.getInstance();
+        toast = new ToastUtil(requireContext());
 
         emailEditText = view.findViewById(R.id.emailEditText);
         passwordEditText = view.findViewById(R.id.passwordEditText);
@@ -74,14 +73,14 @@ public class RegisterFragment extends Fragment {
 
                     FirebaseUser user = mAuth.getCurrentUser();
                     if (user == null) {
-                        showToast(ToastMessage.REGISTER_UNKNOWN_FAIL);
+                        toast.showToast(ToastMessage.REGISTER_UNKNOWN_FAIL);
                         return;
                     }
 
                     user.sendEmailVerification()
                             .addOnCompleteListener(verifyTask -> {
                                 if (verifyTask.isSuccessful()) {
-                                    showToast(ToastMessage.REGISTER_SUCCESS);
+                                    toast.showToast(ToastMessage.REGISTER_SUCCESS);
                                     mAuth.signOut();
                                     goToLogin();
                                 } else {
@@ -130,22 +129,22 @@ public class RegisterFragment extends Fragment {
         String confirmPassword = confirmPasswordEditText.getText().toString().trim();
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
-            showToast(ToastMessage.EMPTY_FIELDS);
+            toast.showToast(ToastMessage.EMPTY_FIELDS);
             return true;
         }
 
         if (!isValidEmail(email)) {
-            showToast(ToastMessage.INVALID_EMAIL);
+            toast.showToast(ToastMessage.INVALID_EMAIL);
             return true;
         }
 
         if (!isPasswordSecure(password)) {
-            showToast(ToastMessage.PASSWORD_TOO_WEAK);
+            toast.showToast(ToastMessage.PASSWORD_TOO_WEAK);
             return true;
         }
 
         if (!password.equals(confirmPassword)) {
-            showToast(ToastMessage.PASSWORD_MISMATCH);
+            toast.showToast(ToastMessage.PASSWORD_MISMATCH);
             return true;
         }
 
@@ -154,17 +153,9 @@ public class RegisterFragment extends Fragment {
 
     private void handleAuthError(Exception e) {
         if (e != null && e.getMessage() != null) {
-            showToastConcat(ToastMessage.REGISTER_FAIL, e.getMessage());
+            toast.showToastConcat(ToastMessage.REGISTER_FAIL, e.getMessage());
         } else {
-            showToast(ToastMessage.REGISTER_FAIL);
+            toast.showToast(ToastMessage.REGISTER_FAIL);
         }
-    }
-
-    private void showToast(ToastMessage message) {
-        Toast.makeText(requireContext(), message.getMessage(), Toast.LENGTH_SHORT).show();
-    }
-
-    private void showToastConcat(ToastMessage message, String additionalString) {
-        Toast.makeText(requireContext(), message.getMessage() + additionalString, Toast.LENGTH_SHORT).show();
     }
 }

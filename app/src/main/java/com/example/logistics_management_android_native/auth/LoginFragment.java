@@ -2,6 +2,7 @@ package com.example.logistics_management_android_native.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.logistics_management_android_native.R;
 import com.example.logistics_management_android_native.home.HomeActivity;
+import com.example.logistics_management_android_native.utils.ToastMessage;
+import com.example.logistics_management_android_native.utils.ToastUtil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -26,6 +29,7 @@ public class LoginFragment extends Fragment {
 
     private FirebaseAuth mAuth;
     private EditText emailEditText, passwordEditText;
+    private ToastUtil toast;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -39,6 +43,7 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         mAuth = FirebaseAuth.getInstance();
+        toast = new ToastUtil(requireContext());
 
         emailEditText = view.findViewById(R.id.emailEditText);
         passwordEditText = view.findViewById(R.id.passwordEditText);
@@ -56,24 +61,34 @@ public class LoginFragment extends Fragment {
         String password = passwordEditText.getText().toString();
 
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(requireContext(), "Complete todos los campos", Toast.LENGTH_SHORT).show();
+            toast.showToast(ToastMessage.EMPTY_FIELDS);
             return;
         }
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity(), task -> {
-                    if (task.isSuccessful()) {
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        if (user != null && user.isEmailVerified()) {
-                            startActivity(new Intent(requireContext(), HomeActivity.class));
-                            requireActivity().finish();
-                        } else {
-                            Toast.makeText(requireContext(), "Debe verificar su correo electrónico antes de ingresar", Toast.LENGTH_LONG).show();
-                            mAuth.signOut();
-                        }
-                    } else {
-                        Toast.makeText(requireContext(), "Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+
+                    if (!task.isSuccessful()) {
+                        String message = Objects.requireNonNull(task.getException()).getMessage();
+                        toast.showToast(ToastMessage.INVALID_LOGIN);
+                        return;
                     }
+
+                    FirebaseUser user = mAuth.getCurrentUser();
+
+                    if (user == null) {
+                        toast.showToast(ToastMessage.INVALID_LOGIN);
+                        return;
+                    }
+
+                    if (!user.isEmailVerified()) {
+                        toast.showToast(ToastMessage.EMAIL_NOT_CONFIRMED);
+                        mAuth.signOut();
+                        return;
+                    }
+
+                    startActivity(new Intent(requireContext(), HomeActivity.class));
+                    requireActivity().finish();
                 });
     }
 

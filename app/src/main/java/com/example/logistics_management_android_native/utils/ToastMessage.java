@@ -7,7 +7,10 @@ public enum ToastMessage {
     PASSWORD_TOO_WEAK("La contraseña es muy debil."),
     REGISTER_SUCCESS("Registro exitoso. Verifique su correo antes de iniciar sesión."),
     REGISTER_FAIL("Hubo un error al registrarse: "),
-    REGISTER_UNKNOWN_FAIL("Hubo un error desconocido al registrarse.");
+    REGISTER_UNKNOWN_FAIL("Hubo un error desconocido al registrarse."),
+    EMAIL_NOT_CONFIRMED("Debe verificar su correo electrónico antes de ingresar"),
+    UNKNOWN_ERROR("Error: "),
+    INVALID_LOGIN("Usuario o contraseña equivocadas.");
 
 
     private final String message;
