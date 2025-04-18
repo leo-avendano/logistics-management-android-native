@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.logistics_management_android_native.auth.LoginActivity;
+import com.example.logistics_management_android_native.auth.AuthActivity;
 import com.example.logistics_management_android_native.home.HomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,7 +22,7 @@ public class LauncherActivity extends AppCompatActivity {
         if (user != null) {
             startActivity(new Intent(this, HomeActivity.class));
         } else {
-            startActivity(new Intent(this, LoginActivity.class));
+            startActivity(new Intent(this, AuthActivity.class));
         }
         finish();
     }
