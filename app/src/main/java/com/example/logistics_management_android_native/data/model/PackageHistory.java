@@ -1,4 +1,4 @@
-package com.example.logistics_management_android_native.model;
+package com.example.logistics_management_android_native.data.model;
 
 public class PackageHistory {
     private final String id;

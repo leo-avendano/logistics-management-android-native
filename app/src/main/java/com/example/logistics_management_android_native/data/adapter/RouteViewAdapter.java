@@ -1,6 +1,6 @@
-package com.example.logistics_management_android_native.home;
+package com.example.logistics_management_android_native.data.adapter;
 
-import com.example.logistics_management_android_native.model.Rute;
+import com.example.logistics_management_android_native.data.model.Route;
 import com.example.logistics_management_android_native.R;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,18 +11,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
-public class RuteViewAdapter extends RecyclerView.Adapter<RuteViewAdapter.RuteViewHolder> {
+public class RouteViewAdapter extends RecyclerView.Adapter<RouteViewAdapter.RuteViewHolder> {
 
-    private List<Rute> ruteList;
+    private List<Route> routeList;
     private OnItemClickListener listener;
 
     public interface OnItemClickListener {
-        void onItemClick(Rute rute);
-        void onDetailsClick(Rute rute);
+        void onItemClick(Route route);
+        void onDetailsClick(Route route);
     }
 
-    public RuteViewAdapter(List<Rute> ruteList) {
-        this.ruteList = ruteList;
+    public RouteViewAdapter(List<Route> routeList) {
+        this.routeList = routeList;
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -39,27 +39,27 @@ public class RuteViewAdapter extends RecyclerView.Adapter<RuteViewAdapter.RuteVi
 
     @Override
     public void onBindViewHolder(@NonNull RuteViewHolder holder, int position) {
-        Rute rute = ruteList.get(position);
+        Route route = routeList.get(position);
 
-        holder.textViewUUID.setText(rute.getUuid());
-        holder.textViewEstado.setText(rute.getEstado());
+        holder.textViewUUID.setText(route.getUuid());
+        holder.textViewEstado.setText(route.getEstado());
 
         holder.itemView.setOnClickListener(v -> {
             if(listener != null) {
-                listener.onItemClick(rute);
+                listener.onItemClick(route);
             }
         });
 
         holder.buttonDetalles.setOnClickListener(v -> {
             if(listener != null) {
-                listener.onDetailsClick(rute);
+                listener.onDetailsClick(route);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return ruteList.size();
+        return routeList.size();
     }
 
     public static class RuteViewHolder extends RecyclerView.ViewHolder {
@@ -74,8 +74,8 @@ public class RuteViewAdapter extends RecyclerView.Adapter<RuteViewAdapter.RuteVi
             buttonDetalles = itemView.findViewById(R.id.buttonDetalles);
         }
     }
-    public void updateList(List<Rute> newList) {
-        ruteList = newList;
+    public void updateList(List<Route> newList) {
+        routeList = newList;
         notifyDataSetChanged();
     }
 }
