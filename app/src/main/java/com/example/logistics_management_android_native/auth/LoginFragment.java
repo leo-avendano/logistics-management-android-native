@@ -21,8 +21,6 @@ import com.example.logistics_management_android_native.utils.ToastUtil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Objects;
-
 public class LoginFragment extends Fragment {
 
     private FirebaseAuth mAuth;
