@@ -1,6 +1,6 @@
-package com.example.logistics_management_android_native.home;
+package com.example.logistics_management_android_native.data.adapter;
 
-import com.example.logistics_management_android_native.model.Route;
+import com.example.logistics_management_android_native.data.model.Route;
 import com.example.logistics_management_android_native.R;
 import android.view.LayoutInflater;
 import android.view.View;

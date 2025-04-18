@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.logistics_management_android_native.R;
-import com.example.logistics_management_android_native.components.NavbarHelperV2;
+import com.example.logistics_management_android_native.components.NavbarHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         View navbar = findViewById(R.id.navbar_menu);
-        NavbarHelperV2.setupNavbar(navbar, this);
+        NavbarHelper.setupNavbar(navbar, this);
 
         if (savedInstanceState == null) {
             loadFragment(new AvailableRoutesFragment());

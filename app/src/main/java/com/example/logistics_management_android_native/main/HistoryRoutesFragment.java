@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.logistics_management_android_native.R;
-import com.example.logistics_management_android_native.history.HistoryRuteAdapter;
-import com.example.logistics_management_android_native.model.PackageHistory;
+import com.example.logistics_management_android_native.data.adapter.HistoryRuteAdapter;
+import com.example.logistics_management_android_native.data.model.PackageHistory;
 
 import java.util.ArrayList;
 

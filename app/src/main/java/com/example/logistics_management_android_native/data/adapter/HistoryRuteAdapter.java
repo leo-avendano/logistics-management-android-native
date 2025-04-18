@@ -1,4 +1,4 @@
-package com.example.logistics_management_android_native.history;
+package com.example.logistics_management_android_native.data.adapter;
 
 import com.example.logistics_management_android_native.R;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
-import com.example.logistics_management_android_native.model.PackageHistory;
+import com.example.logistics_management_android_native.data.model.PackageHistory;
 
 public class HistoryRuteAdapter extends RecyclerView.Adapter<HistoryRuteAdapter.ViewHolder> {
     private final List<PackageHistory> items;

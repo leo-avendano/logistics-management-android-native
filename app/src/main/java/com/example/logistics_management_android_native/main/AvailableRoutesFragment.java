@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.logistics_management_android_native.R;
-import com.example.logistics_management_android_native.home.RouteViewAdapter;
-import com.example.logistics_management_android_native.model.Route;
+import com.example.logistics_management_android_native.data.adapter.RouteViewAdapter;
+import com.example.logistics_management_android_native.data.model.Route;
 
 import java.util.ArrayList;
 import java.util.List;
