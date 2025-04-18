@@ -22,9 +22,7 @@ import java.util.List;
 
 public class AvailableRoutesFragment extends Fragment implements RouteViewAdapter.OnItemClickListener {
 
-    private RecyclerView recyclerView;
-    private RouteViewAdapter adapter;
-    private List<Route> routeList = new ArrayList<>();
+    private final List<Route> routeList = new ArrayList<>();
 
     public AvailableRoutesFragment() {
         super(R.layout.fragment_available_routes);
@@ -34,14 +32,14 @@ public class AvailableRoutesFragment extends Fragment implements RouteViewAdapte
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerView = view.findViewById(R.id.recyclerViewRutes);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerViewRutes);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 //        View navbar = view.findViewById(R.id.navbar_menu);
 //        NavbarHelper.setupNavbar(navbar, requireActivity());
 
         loadSampleData();
-        adapter = new RouteViewAdapter(routeList);
+        RouteViewAdapter adapter = new RouteViewAdapter(routeList);
         adapter.setOnItemClickListener(this);
         recyclerView.setAdapter(adapter);
     }

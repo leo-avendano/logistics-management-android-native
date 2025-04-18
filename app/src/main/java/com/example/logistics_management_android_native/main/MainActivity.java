@@ -5,13 +5,9 @@ import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.logistics_management_android_native.R;
-import com.example.logistics_management_android_native.components.NavbarHelper;
 import com.example.logistics_management_android_native.components.NavbarHelperV2;
 
 public class MainActivity extends AppCompatActivity {

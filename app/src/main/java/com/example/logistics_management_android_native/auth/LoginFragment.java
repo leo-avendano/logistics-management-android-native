@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.logistics_management_android_native.R;
-import com.example.logistics_management_android_native.home.HomeActivity;
 import com.example.logistics_management_android_native.main.MainActivity;
 import com.example.logistics_management_android_native.utils.ToastMessage;
 import com.example.logistics_management_android_native.utils.ToastUtil;

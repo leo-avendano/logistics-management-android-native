@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class HistoryRoutesFragment extends Fragment {
 
     private HistoryRuteAdapter adapter;
-    private ArrayList<PackageHistory> packageList;
 
     @Nullable
     @Override
@@ -32,7 +31,7 @@ public class HistoryRoutesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_history_routes, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        packageList = new ArrayList<>();
+        ArrayList<PackageHistory> packageList = new ArrayList<>();
         adapter = new HistoryRuteAdapter(packageList);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
