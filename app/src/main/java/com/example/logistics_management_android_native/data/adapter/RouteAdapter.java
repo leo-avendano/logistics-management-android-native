@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
-public class RouteViewAdapter extends RecyclerView.Adapter<RouteViewAdapter.RuteViewHolder> {
+public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RuteViewHolder> {
 
     private List<Route> routeList;
     private OnItemClickListener listener;
@@ -21,7 +21,7 @@ public class RouteViewAdapter extends RecyclerView.Adapter<RouteViewAdapter.Rute
         void onDetailsClick(Route route);
     }
 
-    public RouteViewAdapter(List<Route> routeList) {
+    public RouteAdapter(List<Route> routeList) {
         this.routeList = routeList;
     }
 
