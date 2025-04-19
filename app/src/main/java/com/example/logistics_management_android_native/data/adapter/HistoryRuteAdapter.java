@@ -9,12 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
-import com.example.logistics_management_android_native.data.model.PackageHistory;
+import com.example.logistics_management_android_native.data.model.Route;
 
 public class HistoryRuteAdapter extends RecyclerView.Adapter<HistoryRuteAdapter.ViewHolder> {
-    private final List<PackageHistory> items;
+    private final List<Route> items;
 
-    public HistoryRuteAdapter(List<PackageHistory> items) {
+    public HistoryRuteAdapter(List<Route> items) {
         this.items = items;
     }
 
@@ -35,7 +35,7 @@ public class HistoryRuteAdapter extends RecyclerView.Adapter<HistoryRuteAdapter.
         return items.size();
     }
 
-    public void addItem(PackageHistory item) {
+    public void addItem(Route item) {
         items.add(item);
         notifyItemInserted(items.size() - 1);
     }
@@ -52,10 +52,10 @@ public class HistoryRuteAdapter extends RecyclerView.Adapter<HistoryRuteAdapter.
             textStatus = itemView.findViewById(R.id.textStatus);
         }
 
-        public void bind(PackageHistory item) {
-            textId.setText(item.getId());
-            textDate.setText(item.getDate());
-            textStatus.setText(item.getStatus());
+        public void bind(Route item) {
+            textId.setText(item.getUuid());
+            textDate.setText(item.getFechas().getInicioRepartir());
+            textStatus.setText(item.getEstado());
         }
     }
 }

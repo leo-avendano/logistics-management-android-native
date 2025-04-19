@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.logistics_management_android_native.R;
 import com.example.logistics_management_android_native.data.adapter.HistoryRuteAdapter;
-import com.example.logistics_management_android_native.data.model.PackageHistory;
+import com.example.logistics_management_android_native.data.model.Route;
 
 import java.util.ArrayList;
 
@@ -31,23 +31,50 @@ public class HistoryRoutesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_history_routes, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        ArrayList<PackageHistory> packageList = new ArrayList<>();
-        adapter = new HistoryRuteAdapter(packageList);
+        ArrayList<Route> routeList = new ArrayList<>();
+        adapter = new HistoryRuteAdapter(routeList);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(adapter);
 
         // Sample data
-        addItem(new PackageHistory("Paquete DH95K", "15/04/2025", "Completada"));
-        addItem(new PackageHistory("Paquete KFLD4Q", "12/04/2025", "Completada"));
-        addItem(new PackageHistory("Paquete UBK64D", "11/04/2025", "Completada"));
-        addItem(new PackageHistory("Paquete M9KDJ", "11/04/2025", "Fallida"));
+        addItem(Route.builder()
+                .uuid("DH95K")
+                .fechas(Route.Fechas.builder()
+                        .inicioRepartir("15/04/2025")
+                        .build())
+                .estado("Completada")
+                .build());
+
+        addItem(Route.builder()
+                .uuid("KFLD4Q")
+                .fechas(Route.Fechas.builder()
+                        .inicioRepartir("12/04/2025")
+                        .build())
+                .estado("Completada")
+                .build());
+
+        addItem(Route.builder()
+                .uuid("UBK64D")
+                .fechas(Route.Fechas.builder()
+                        .inicioRepartir("11/04/2025")
+                        .build())
+                .estado("Completada")
+                .build());
+
+        addItem(Route.builder()
+                .uuid("M9KDJ")
+                .fechas(Route.Fechas.builder()
+                        .inicioRepartir("11/04/2025")
+                        .build())
+                .estado("Fallida")
+                .build());
 
         return view;
     }
 
-    private void addItem(PackageHistory packageHistory) {
-        adapter.addItem(packageHistory); // Make sure adapter has this method
+    private void addItem(Route aRoute ) {
+        adapter.addItem(aRoute); // Make sure adapter has this method
     }
 
 }

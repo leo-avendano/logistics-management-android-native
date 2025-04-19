@@ -13,14 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.logistics_management_android_native.R;
-import com.example.logistics_management_android_native.data.adapter.RouteViewAdapter;
+import com.example.logistics_management_android_native.data.adapter.RouteAdapter;
 import com.example.logistics_management_android_native.data.model.Route;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class AvailableRoutesFragment extends Fragment implements RouteViewAdapter.OnItemClickListener {
+public class AvailableRoutesFragment extends Fragment implements RouteAdapter.OnItemClickListener {
 
     private final List<Route> routeList = new ArrayList<>();
 
@@ -39,7 +39,7 @@ public class AvailableRoutesFragment extends Fragment implements RouteViewAdapte
 //        NavbarHelper.setupNavbar(navbar, requireActivity());
 
         loadSampleData();
-        RouteViewAdapter adapter = new RouteViewAdapter(routeList);
+        RouteAdapter adapter = new RouteAdapter(routeList);
         adapter.setOnItemClickListener(this);
         recyclerView.setAdapter(adapter);
     }
