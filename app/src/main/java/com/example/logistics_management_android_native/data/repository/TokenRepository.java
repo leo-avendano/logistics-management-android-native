@@ -1,4 +1,4 @@
-package com.example.logistics_management_android_native.data.repository.token;
+package com.example.logistics_management_android_native.data.repository;
 
 import android.content.Context;
 import android.content.SharedPreferences;

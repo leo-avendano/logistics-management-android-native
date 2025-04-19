@@ -1,34 +1,29 @@
 package com.example.logistics_management_android_native.components;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+
 import com.example.logistics_management_android_native.R;
 import com.example.logistics_management_android_native.auth.AuthActivity;
-import com.example.logistics_management_android_native.history.HistoryActivity;
-import com.example.logistics_management_android_native.home.HomeActivity;
+import com.example.logistics_management_android_native.main.AvailableRoutesFragment;
+import com.example.logistics_management_android_native.main.HistoryRoutesFragment;
+import com.example.logistics_management_android_native.main.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class NavbarHelper {
-    public static void setupNavbar(View navbar, Activity  activity) {
+    public static void setupNavbar(View navbar, MainActivity activity) {
         Button btnHome = navbar.findViewById(R.id.nav_home);
 //        Button btnRute = navbar.findViewById(R.id.nav_rute);
         Button btnHistory = navbar.findViewById(R.id.nav_history);
         Button btnLogout = navbar.findViewById(R.id.nav_logout);
 //        ImageButton btnQr = navbar.findViewById(R.id.nav_qr);
 
-        btnHome.setOnClickListener(v -> {
-            if (!(activity instanceof HomeActivity)) {
-                activity.startActivity(new Intent(activity, HomeActivity.class));
-            }
-        });
 
-        btnHistory.setOnClickListener(v -> {
-            if (!(activity instanceof HistoryActivity)) {
-                activity.startActivity(new Intent(activity, HistoryActivity.class));
-            }
-        });
+        btnHome.setOnClickListener(v -> activity.loadFragment(new AvailableRoutesFragment()));
+        btnHistory.setOnClickListener(v -> activity.loadFragment(new HistoryRoutesFragment()));
+
+
 
         btnLogout.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();

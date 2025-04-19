@@ -1,7 +1,7 @@
 package com.example.logistics_management_android_native.injection;
 
 import android.content.Context;
-import com.example.logistics_management_android_native.data.repository.token.TokenRepository;
+import com.example.logistics_management_android_native.data.repository.TokenRepository;
 import javax.inject.Singleton;
 
 import dagger.Module;
