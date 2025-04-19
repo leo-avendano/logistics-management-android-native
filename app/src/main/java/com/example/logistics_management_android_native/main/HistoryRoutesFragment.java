@@ -74,10 +74,6 @@ public class HistoryRoutesFragment extends Fragment {
                     for (Route route : routes) {
                         adapter.addItem(route);
                     }
-
-                    if (routes.isEmpty()) {
-                        Toast.makeText(getContext(), repartidorId, Toast.LENGTH_SHORT).show();
-                    }
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(getContext(), "Error al cargar historial: " + e.getMessage(), Toast.LENGTH_SHORT).show();

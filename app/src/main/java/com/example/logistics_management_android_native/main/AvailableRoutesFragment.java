@@ -122,11 +122,6 @@ public class AvailableRoutesFragment extends Fragment implements RouteAdapter.On
         routeList.clear();
         routeList.addAll(routes);
         adapter.notifyDataSetChanged();
-
-        if (routes.isEmpty()) {
-            Toast.makeText(getContext(), "No hay rutas " + currentFilter.toLowerCase(),
-                    Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void handleError(Exception e) {
