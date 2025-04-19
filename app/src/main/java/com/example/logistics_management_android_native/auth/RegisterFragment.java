@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.logistics_management_android_native.R;
+import com.example.logistics_management_android_native.utils.NetworkUtils;
 import com.example.logistics_management_android_native.utils.ToastMessage;
 import com.example.logistics_management_android_native.utils.ToastUtil;
 import com.google.firebase.auth.FirebaseAuth;
@@ -66,6 +67,12 @@ public class RegisterFragment extends Fragment {
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity(), task -> {
+
+                    if (!NetworkUtils.isConnectedToInternet(requireContext())) {
+                        toast.showToast(ToastMessage.NETWORK_FAIL);
+                        return;
+                    }
+
                     if (!task.isSuccessful()) {
                         handleAuthError(task.getException());
                         return;

@@ -10,8 +10,8 @@ public enum ToastMessage {
     REGISTER_UNKNOWN_FAIL("Hubo un error desconocido al registrarse."),
     EMAIL_NOT_CONFIRMED("Debe verificar su correo electrónico antes de ingresar"),
 //    UNKNOWN_ERROR("Error: "),
-    INVALID_LOGIN("Usuario o contraseña equivocadas.");
-
+    INVALID_LOGIN("Usuario o contraseña equivocadas."),
+    NETWORK_FAIL("Hubo un problema de conexión a la red, inténtelo más tarde");
 
     private final String message;
 
