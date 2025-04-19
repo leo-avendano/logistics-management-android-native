@@ -47,9 +47,11 @@ public class LoginFragment extends Fragment {
         Button loginButton = view.findViewById(R.id.loginButton);
         TextView registerText = view.findViewById(R.id.registerText);
 
+        TextView recoverText = view.findViewById(R.id.recoverText);
+
         loginButton.setOnClickListener(v -> loginUser());
         registerText.setOnClickListener(v -> goToRegister());
-
+        recoverText.setOnClickListener(v -> goToRecover());
         return view;
     }
 
@@ -106,4 +108,16 @@ public class LoginFragment extends Fragment {
                 .addToBackStack(null)
                 .commit();
     }
+
+    private void goToRecover() {
+        requireActivity().getSupportFragmentManager()
+                .popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.auth_fragment_container, new RecoverFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
 }
