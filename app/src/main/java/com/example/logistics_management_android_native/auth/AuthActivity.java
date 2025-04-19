@@ -29,7 +29,7 @@ public class AuthActivity extends AppCompatActivity {
                     .commit();
         }
 
-        if (!NetworkUtils.isConnectedToWifi(this)) {
+        if (!NetworkUtils.isConnectedToInternet(this)) {
             toast.showToast(ToastMessage.NETWORK_FAIL);
         }
     }

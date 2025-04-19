@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.logistics_management_android_native.R;
 import com.example.logistics_management_android_native.home.HomeActivity;
+import com.example.logistics_management_android_native.utils.NetworkUtils;
 import com.example.logistics_management_android_native.utils.ToastMessage;
 import com.example.logistics_management_android_native.utils.ToastUtil;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,6 +64,11 @@ public class LoginFragment extends Fragment {
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity(), task -> {
+
+                    if (!NetworkUtils.isConnectedToInternet(requireContext())) {
+                        toast.showToast(ToastMessage.NETWORK_FAIL);
+                        return;
+                    }
 
                     if (!task.isSuccessful()) {
                         // Usa esto si hay algun bug con el login.
