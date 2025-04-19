@@ -10,6 +10,9 @@ import androidx.fragment.app.Fragment;
 import com.example.logistics_management_android_native.R;
 import com.example.logistics_management_android_native.components.NavbarHelper;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.logistics_management_android_native.main;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.logistics_management_android_native.R;
 import com.example.logistics_management_android_native.data.adapter.RouteAdapter;
+import com.example.logistics_management_android_native.data.interfaces.LogisticsService;
+import com.example.logistics_management_android_native.data.interfaces.LogisticsServiceCallback;
 import com.example.logistics_management_android_native.data.model.Route;
 import com.example.logistics_management_android_native.data.repository.FirebaseRouteRepository;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +27,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class AvailableRoutesFragment extends Fragment implements RouteAdapter.OnItemClickListener {
 
     private List<Route> routeList = new ArrayList<>();
@@ -32,6 +40,9 @@ public class AvailableRoutesFragment extends Fragment implements RouteAdapter.On
     private FirebaseAuth mAuth;
     private RadioGroup radioGroupFiltro;
     private String currentFilter = "Todas";
+
+    @Inject
+    LogisticsService logisticsService;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -136,6 +147,16 @@ public class AvailableRoutesFragment extends Fragment implements RouteAdapter.On
 
     @Override
     public void onDetailsClick(Route route) {
-        // Manejar clic en detalles
+        logisticsService.getHelloWorld(new LogisticsServiceCallback() {
+            @Override
+            public void onSuccess(String message) {
+                Log.d("PEPE", "Hello World response: " + message);
+            }
+
+            @Override
+            public void onError(Throwable error) {
+                Log.e("PEPE", "Error calling hello world: " + error.getMessage());
+            }
+        });
     }
 }
