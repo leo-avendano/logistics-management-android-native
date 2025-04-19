@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,12 +15,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.logistics_management_android_native.R;
 import com.example.logistics_management_android_native.data.adapter.HistoryRuteAdapter;
 import com.example.logistics_management_android_native.data.model.Route;
+import com.example.logistics_management_android_native.data.repository.FirebaseRouteRepository;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
 public class HistoryRoutesFragment extends Fragment {
 
     private HistoryRuteAdapter adapter;
+    private FirebaseRouteRepository routeRepository;
+    private FirebaseAuth mAuth;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        routeRepository = new FirebaseRouteRepository();
+        mAuth = FirebaseAuth.getInstance();
+    }
 
     @Nullable
     @Override
@@ -37,44 +50,37 @@ public class HistoryRoutesFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(adapter);
 
-        // Sample data
-        addItem(Route.builder()
-                .uuid("DH95K")
-                .fechas(Route.Fechas.builder()
-                        .inicioRepartir("15/04/2025")
-                        .build())
-                .estado("Completada")
-                .build());
-
-        addItem(Route.builder()
-                .uuid("KFLD4Q")
-                .fechas(Route.Fechas.builder()
-                        .inicioRepartir("12/04/2025")
-                        .build())
-                .estado("Completada")
-                .build());
-
-        addItem(Route.builder()
-                .uuid("UBK64D")
-                .fechas(Route.Fechas.builder()
-                        .inicioRepartir("11/04/2025")
-                        .build())
-                .estado("Completada")
-                .build());
-
-        addItem(Route.builder()
-                .uuid("M9KDJ")
-                .fechas(Route.Fechas.builder()
-                        .inicioRepartir("11/04/2025")
-                        .build())
-                .estado("Fallida")
-                .build());
-
         return view;
     }
 
-    private void addItem(Route aRoute ) {
-        adapter.addItem(aRoute); // Make sure adapter has this method
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        loadRepartidorRoutes();
     }
 
+    private void loadRepartidorRoutes() {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            Toast.makeText(getContext(), "No autenticado", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String repartidorId = currentUser.getUid();
+
+        routeRepository.getRoutesByRepartidor(repartidorId, 20) // Limita a 20 rutas recientes
+                .addOnSuccessListener(routes -> {
+                    adapter.clearItems();
+                    for (Route route : routes) {
+                        adapter.addItem(route);
+                    }
+
+                    if (routes.isEmpty()) {
+                        Toast.makeText(getContext(), repartidorId, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Error al cargar historial: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
 }

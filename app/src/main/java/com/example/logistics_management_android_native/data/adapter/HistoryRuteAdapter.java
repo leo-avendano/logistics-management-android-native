@@ -40,6 +40,11 @@ public class HistoryRuteAdapter extends RecyclerView.Adapter<HistoryRuteAdapter.
         notifyItemInserted(items.size() - 1);
     }
 
+    public void clearItems() {
+        items.clear();
+        notifyDataSetChanged();
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textId;
         private final TextView textDate;
