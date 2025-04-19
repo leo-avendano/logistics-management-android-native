@@ -2,7 +2,7 @@
     <string name="app_name">Logistics-management-android-native</string>
     <string name="historial_de_rutas">HISTORIAL DE RUTAS</string>
     <string name="rutas_de_hoy">RUTAS DE HOY</string>
-    <string name="detalles">Detalles</string>
+    <string name="reservar">Reservar</string>
     <string name="format_uuid">Paquete %s</string>
     <string name="format_estado">%s</string>
     <string name="howToLogin">Ingrese su usuario y contraseña para continuar</string>

@@ -41,8 +41,20 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RuteViewHold
     public void onBindViewHolder(@NonNull RuteViewHolder holder, int position) {
         Route route = routeList.get(position);
 
-        holder.textViewUUID.setText(route.getUuid());
-        holder.textViewEstado.setText(route.getEstado());
+        holder.routeNameTextView.setText(route.getUuid());
+        holder.routeStatusTextView.setText(route.getEstado());
+
+        // Set button visibility and text based on route status
+        String estado = route.getEstado().toLowerCase();
+        if ("disponible".equals(estado)) {
+            holder.actionButton.setVisibility(View.VISIBLE);
+            holder.actionButton.setText("Reservar");
+        } else if ("pendiente".equals(estado)) {
+            holder.actionButton.setVisibility(View.VISIBLE);
+            holder.actionButton.setText("Borrar");
+        } else {
+            holder.actionButton.setVisibility(View.GONE);
+        }
 
         holder.itemView.setOnClickListener(v -> {
             if(listener != null) {
@@ -50,7 +62,7 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RuteViewHold
             }
         });
 
-        holder.buttonDetalles.setOnClickListener(v -> {
+        holder.actionButton.setOnClickListener(v -> {
             if(listener != null) {
                 listener.onDetailsClick(route);
             }
@@ -63,17 +75,18 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RuteViewHold
     }
 
     public static class RuteViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewUUID;
-        TextView textViewEstado;
-        Button buttonDetalles;
+        TextView routeNameTextView;
+        TextView routeStatusTextView;
+        Button actionButton;
 
         public RuteViewHolder(@NonNull View itemView) {
             super(itemView);
-            textViewUUID = itemView.findViewById(R.id.textViewUUID);
-            textViewEstado = itemView.findViewById(R.id.textViewEstado);
-            buttonDetalles = itemView.findViewById(R.id.buttonDetalles);
+            routeNameTextView = itemView.findViewById(R.id.routeNameTextView);
+            routeStatusTextView = itemView.findViewById(R.id.routeStatusTextView);
+            actionButton = itemView.findViewById(R.id.actionButton);
         }
     }
+
     public void updateList(List<Route> newList) {
         routeList = newList;
         notifyDataSetChanged();
