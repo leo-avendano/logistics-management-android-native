@@ -2,6 +2,8 @@ package com.example.logistics_management_android_native.data.adapter;
 
 import com.example.logistics_management_android_native.data.model.Route;
 import com.example.logistics_management_android_native.R;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,8 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RuteViewHold
 
     public RouteAdapter(List<Route> routeList) {
         this.routeList = routeList;
+
+
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -44,16 +48,23 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RuteViewHold
         holder.routeNameTextView.setText(route.getUuid());
         holder.routeStatusTextView.setText(route.getEstado());
 
-        // Set button visibility and text based on route status
         String estado = route.getEstado().toLowerCase();
-        if ("disponible".equals(estado)) {
-            holder.actionButton.setVisibility(View.VISIBLE);
-            holder.actionButton.setText("Reservar");
-        } else if ("pendiente".equals(estado)) {
-            holder.actionButton.setVisibility(View.VISIBLE);
-            holder.actionButton.setText("Borrar");
-        } else {
-            holder.actionButton.setVisibility(View.GONE);
+        Log.println(Log.INFO, "route", estado);
+        switch (estado) {
+            case "disponible":
+                holder.routeStatusTextView.setTextAppearance(R.style.TextRowStatus_Disponible);
+                holder.actionButton.setVisibility(View.VISIBLE);
+                holder.actionButton.setText("Reservar");
+                break;
+            case "pendiente":
+                holder.routeStatusTextView.setTextAppearance(R.style.TextRowStatus_Pendiente);
+                holder.actionButton.setVisibility(View.VISIBLE);
+                holder.actionButton.setText("Borrar");
+                break;
+            case "en progreso":
+                holder.routeStatusTextView.setTextAppearance(R.style.TextRowStatus_EnProgreso);
+                holder.actionButton.setVisibility(View.GONE);
+                break;
         }
 
         holder.itemView.setOnClickListener(v -> {

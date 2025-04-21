@@ -14,6 +14,26 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TextRowStatus.Completado" parent="TextRowStatus">
+        <item name="android:textColor">@color/completado</item>
+    </style>
+
+    <style name="TextRowStatus.Pendiente" parent="TextRowStatus">
+        <item name="android:textColor">@color/pendiente</item>
+    </style>
+
+    <style name="TextRowStatus.EnProgreso" parent="TextRowStatus">
+        <item name="android:textColor">@color/enProgreso</item>
+    </style>
+
+    <style name="TextRowStatus.Fallida" parent="TextRowStatus">
+        <item name="android:textColor">@color/fallida</item>
+    </style>
+
+    <style name="TextRowStatus.Disponible" parent="TextRowStatus">
+        <item name="android:textColor">@color/disponible</item>
+    </style>
+
     <style name="horizontalRadioButtonHomeScreen" parent="Widget.AppCompat.CompoundButton.RadioButton">
         <item name="android:button">@null</item>
         <item name="android:paddingHorizontal" tools:targetApi="26">16dp</item>

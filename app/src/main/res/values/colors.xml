@@ -3,4 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="yellow">#FFC107</color>
+    <color name="completado">#4CAF50</color>
+    <color name="pendiente">#F6A633</color>
+    <color name="enProgreso">#FF7700</color>
+    <color name="fallida">#F44336</color>
+    <color name="disponible">#4CAF50</color>
 </resources>

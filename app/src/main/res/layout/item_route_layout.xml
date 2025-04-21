@@ -34,12 +34,13 @@
                 tools:text="Route Name" />
 
             <TextView
+                style="@style/TextRowStatus"
                 android:id="@+id/routeStatusTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginStart="20dp"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
                 tools:text="Status" />
         </LinearLayout>

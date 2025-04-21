@@ -13,7 +13,7 @@
             android:id="@+id/textId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Paquete DH95K"
+            android:text="@string/history_routes_uuid"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:text="15/04/2025"
+            android:text="@string/history_routes_date"
             android:textColor="@android:color/darker_gray"
             android:textSize="16sp" />
     </LinearLayout>
@@ -33,6 +33,5 @@
         android:layout_marginStart="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Completada"
-        android:textColor="@android:color/holo_green_light" />
+        android:text="@string/history_routes_status"/>
 </LinearLayout>
