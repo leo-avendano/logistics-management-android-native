@@ -34,7 +34,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class AvailableRoutesFragment extends Fragment implements RouteAdapter.OnItemClickListener {
 
-    private List<Route> routeList = new ArrayList<>();
+    private final List<Route> routeList = new ArrayList<>();
     private RouteAdapter adapter;
     private FirebaseRouteRepository routeRepository;
     private FirebaseAuth mAuth;
@@ -142,11 +142,6 @@ public class AvailableRoutesFragment extends Fragment implements RouteAdapter.On
 
     @Override
     public void onItemClick(Route route) {
-        // Manejar clic en ruta
-    }
-
-    @Override
-    public void onDetailsClick(Route route) {
         logisticsService.getHelloWorld(new LogisticsServiceCallback() {
             @Override
             public void onSuccess(String message) {
@@ -158,5 +153,48 @@ public class AvailableRoutesFragment extends Fragment implements RouteAdapter.On
                 Log.e("PEPE", "Error calling hello world: " + error.getMessage());
             }
         });
+    }
+
+    @Override
+    public void onDetailsClick(Route route) {
+        String userId = mAuth.getCurrentUser() != null ? mAuth.getCurrentUser().getUid() : "";
+        if (userId.isEmpty()) {
+            Toast.makeText(getContext(), "User not authenticated", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if ("pendiente".equalsIgnoreCase(route.getEstado())) {
+            logisticsService.unassignRouteFromRepartidor(route.getUuid(), new LogisticsServiceCallback() {
+                @Override
+                public void onSuccess(String message) {
+                    Log.d("PEPE", "Route unassignment success: " + message);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    loadRoutes(); // Refresh the routes list
+                }
+
+                @Override
+                public void onError(Throwable error) {
+                    Log.e("PEPE", "Error unassigning route: " + error.getMessage());
+                    Toast.makeText(getContext(), "Error unassigning route: " + error.getMessage(), 
+                        Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            logisticsService.assignRouteToRepartidor(route.getUuid(), userId, new LogisticsServiceCallback() {
+                @Override
+                public void onSuccess(String message) {
+                    Log.d("PEPE", "Route assignment success: " + message);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    loadRoutes(); // Refresh the routes list
+                }
+
+                @Override
+                public void onError(Throwable error) {
+                    Log.e("PEPE", "Error assigning route: " + error.getMessage());
+                    Toast.makeText(getContext(), "Error assigning route: " + error.getMessage(), 
+                        Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }

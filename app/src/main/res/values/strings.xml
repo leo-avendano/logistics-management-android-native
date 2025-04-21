@@ -2,7 +2,7 @@
     <string name="app_name">Logistics-management-android-native</string>
     <string name="historial_de_rutas">HISTORIAL DE RUTAS</string>
     <string name="rutas_de_hoy">RUTAS DE HOY</string>
-    <string name="detalles">Detalles</string>
+    <string name="reservar">Reservar</string>
     <string name="format_uuid">Paquete %s</string>
     <string name="format_estado">%s</string>
     <string name="howToLogin">Ingrese su usuario y contraseña para continuar</string>
@@ -15,4 +15,8 @@
     <string name="apple_icon">Logo of the company Apple (A bitten apple)</string>
     <string name="howToRecover">Ingrese el email de su cuenta para recuperar la contraseña.</string>
     <string name="emailSent">Te enviamos un correo con un enlace de confirmacion! Por favor revisa tu bandeja de entrada para continuar.</string>
+    <string name="history_routes_uuid">%s</string>
+    <string name="history_routes_date">%s</string>
+    <string name="history_routes_status">%s</string>
+
 </resources>

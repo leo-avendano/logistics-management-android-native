@@ -2,9 +2,11 @@ package com.example.logistics_management_android_native.injection;
 
 import android.content.Context;
 
+import com.example.logistics_management_android_native.data.interceptors.AuthInterceptor;
 import com.example.logistics_management_android_native.data.interfaces.LogisticsApiService;
 import com.example.logistics_management_android_native.data.interfaces.LogisticsService;
 import com.example.logistics_management_android_native.data.services.LogisticsRetrofitService;
+import com.google.firebase.auth.FirebaseAuth;
 
 import dagger.Module;
 import dagger.Provides;
@@ -17,6 +19,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 import java.io.File;
 
 @Module
@@ -32,20 +35,31 @@ public class LogisticsNetworkModule {
 
     @Provides
     @Singleton
-    OkHttpClient provideOkHttpClient(Cache cache) {
+    OkHttpClient provideOkHttpClient(Cache cache, AuthInterceptor authInterceptor) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
 
         return new OkHttpClient.Builder()
                 .addInterceptor(logging)
+                .addInterceptor(authInterceptor)
                 .cache(cache)
-                .addNetworkInterceptor(chain -> {
-                    return chain.proceed(chain.request())
-                            .newBuilder()
-                            .header("Cache-Control", "public, max-age=60") // Cache por 60 segundos
-                            .build();
-                })
+                .addNetworkInterceptor(chain -> chain.proceed(chain.request())
+                        .newBuilder()
+                        .header("Cache-Control", "public, max-age=60") // Cache por 60 segundos
+                        .build())
                 .build();
+    }
+
+    @Provides
+    @Singleton
+    AuthInterceptor provideAuthInterceptor(FirebaseAuth firebaseAuth) {
+        return new AuthInterceptor(firebaseAuth);
+    }
+
+    @Provides
+    @Singleton
+    FirebaseAuth provideFirebaseAuth() {
+        return FirebaseAuth.getInstance();
     }
 
     @Provides
@@ -54,6 +68,7 @@ public class LogisticsNetworkModule {
         return new Retrofit.Builder()
                 .baseUrl("https://logistics-management-26709.web.app/api/")
                 .client(client)
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

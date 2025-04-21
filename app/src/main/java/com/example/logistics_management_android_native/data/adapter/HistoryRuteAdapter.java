@@ -12,36 +12,53 @@ import java.util.List;
 import com.example.logistics_management_android_native.data.model.Route;
 
 public class HistoryRuteAdapter extends RecyclerView.Adapter<HistoryRuteAdapter.ViewHolder> {
-    private final List<Route> items;
+    private final List<Route> routeList;
 
     public HistoryRuteAdapter(List<Route> items) {
-        this.items = items;
+        this.routeList = items;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history_layout, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bind(items.get(position));
+        Route route = routeList.get(position);
+        holder.bind(routeList.get(position));
+        switch (route.getEstado()) {
+            case "completado":
+                holder.textStatus.setTextAppearance(R.style.TextRowStatus_Completado);
+                break;
+            case "pendiente":
+                holder.textStatus.setTextAppearance(R.style.TextRowStatus_Pendiente);
+                break;
+            case "en progreso":
+                holder.textStatus.setTextAppearance(R.style.TextRowStatus_EnProgreso);
+                break;
+            case "fallido":
+                holder.textStatus.setTextAppearance(R.style.TextRowStatus_Fallida);
+                break;
+            default:
+                holder.textStatus.setTextAppearance(R.style.TextRowStatus);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return routeList.size();
     }
 
     public void addItem(Route item) {
-        items.add(item);
-        notifyItemInserted(items.size() - 1);
+        routeList.add(item);
+        notifyItemInserted(routeList.size() - 1);
     }
 
     public void clearItems() {
-        items.clear();
+        routeList.clear();
         notifyDataSetChanged();
     }
 
