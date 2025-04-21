@@ -48,8 +48,7 @@ public class RecoverFragment extends Fragment {
             FirebaseAuth.getInstance().sendPasswordResetEmail(email)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            toast.showToast(ToastMessage.REGISTER_SUCCESS);
-                            requireActivity().getSupportFragmentManager().popBackStack(); // Volver a login
+                            goToConfirmation();
                         } else {
                             toast.showToast(ToastMessage.NETWORK_FAIL);
                         }
@@ -66,6 +65,17 @@ public class RecoverFragment extends Fragment {
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.auth_fragment_container, new LoginFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private void goToConfirmation() {
+        requireActivity().getSupportFragmentManager()
+                .popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.auth_fragment_container, new ConfirmationFragment())
                 .addToBackStack(null)
                 .commit();
     }

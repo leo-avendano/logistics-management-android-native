@@ -14,4 +14,5 @@
     <string name="google_icon">Icon of the company google (a letter G)</string>
     <string name="apple_icon">Logo of the company Apple (A bitten apple)</string>
     <string name="howToRecover">Ingrese el email de su cuenta para recuperar la contraseña.</string>
+    <string name="emailSent">Te enviamos un correo con un enlace de confirmacion! Por favor revisa tu bandeja de entrada para continuar.</string>
 </resources>
