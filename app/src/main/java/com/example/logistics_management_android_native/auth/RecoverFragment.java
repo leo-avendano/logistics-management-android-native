@@ -31,31 +31,48 @@ public class RecoverFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recover, container, false);
+
         TextView loginText = view.findViewById(R.id.loginText);
         emailEditText = view.findViewById(R.id.emailEditText);
         Button sendEmailButton = view.findViewById(R.id.recoverButton);
         toast = new ToastUtil(requireContext());
+
         loginText.setOnClickListener(v -> goToLogin());
 
-        sendEmailButton.setOnClickListener(v -> {
-            String email = emailEditText.getText().toString().trim();
-
-            if (TextUtils.isEmpty(email)) {
-                toast.showToast(ToastMessage.EMPTY_FIELDS);
-                return;
-            }
-
-            FirebaseAuth.getInstance().sendPasswordResetEmail(email)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            goToConfirmation();
-                        } else {
-                            toast.showToast(ToastMessage.NETWORK_FAIL);
-                        }
-                    });
-        });
+        sendEmailButton.setOnClickListener(v -> recoverPassword());
 
         return view;
+    }
+
+    private void recoverPassword() {
+        String email = emailEditText.getText().toString().trim();
+
+        if (TextUtils.isEmpty(email)) {
+            toast.showToast(ToastMessage.EMPTY_FIELDS);
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            toast.showToast(ToastMessage.INVALID_EMAIL);
+            return;
+        }
+
+        FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        goToConfirmation();
+                    } else {
+                        if (task.getException() != null && task.getException().getMessage() != null) {
+                            toast.showToastConcat(ToastMessage.RECOVER_FAIL, task.getException().getMessage());
+                        } else {
+                            toast.showToast(ToastMessage.RECOVER_FAIL);
+                        }
+                    }
+                });
+    }
+
+    private boolean isValidEmail(String email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private void goToLogin() {
@@ -79,5 +96,4 @@ public class RecoverFragment extends Fragment {
                 .addToBackStack(null)
                 .commit();
     }
-
 }

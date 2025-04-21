@@ -11,7 +11,8 @@ public enum ToastMessage {
     EMAIL_NOT_CONFIRMED("Debe verificar su correo electrónico antes de ingresar"),
 //    UNKNOWN_ERROR("Error: "),
     INVALID_LOGIN("Usuario o contraseña equivocadas."),
-    NETWORK_FAIL("Hubo un problema de conexión a la red, inténtelo más tarde");
+    NETWORK_FAIL("Hubo un problema de conexión a la red, inténtelo más tarde"),
+    RECOVER_FAIL("Fallo al enviar el correo de recuperación: ");
 
     private final String message;
 
