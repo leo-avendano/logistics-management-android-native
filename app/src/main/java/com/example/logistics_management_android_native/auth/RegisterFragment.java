@@ -87,9 +87,8 @@ public class RegisterFragment extends Fragment {
                     user.sendEmailVerification()
                             .addOnCompleteListener(verifyTask -> {
                                 if (verifyTask.isSuccessful()) {
-                                    toast.showToast(ToastMessage.REGISTER_SUCCESS);
                                     mAuth.signOut();
-                                    goToLogin();
+                                    goToConfirmation();
                                 } else {
                                     handleAuthError(verifyTask.getException());
                                 }
@@ -108,6 +107,16 @@ public class RegisterFragment extends Fragment {
                 .commit();
     }
 
+    private void goToConfirmation() {
+        requireActivity().getSupportFragmentManager()
+                .popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.auth_fragment_container, new ConfirmationFragment())
+                .addToBackStack(null)
+                .commit();
+    }
     private boolean isValidEmail(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFFFFF"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/de_remate"
+            android:layout_marginTop="28dp"
+            android:contentDescription="Logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DeRemate"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:layout_marginTop="0dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_weight="1"
+            android:background="#000"
+            android:layout_marginTop="10dp"/>
+
+        <ImageView
+            android:id="@+id/email"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/email"
+            android:layout_marginVertical="32dp"
+            android:contentDescription="Logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EMAIL ENVIADO"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:layout_marginTop="0dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/emailSent"
+            android:textSize="18sp"
+            android:layout_margin="18dp" />
+
+
+        <Button
+            android:id="@+id/continueButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="ENTENDIDO"
+            android:backgroundTint="#FFC107"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:textColor="#000"
+            android:layout_marginBottom="16dp" />
+
+
+
+    </LinearLayout>
+</ScrollView>
