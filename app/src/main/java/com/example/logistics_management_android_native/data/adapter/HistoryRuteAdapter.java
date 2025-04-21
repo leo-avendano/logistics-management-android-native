@@ -39,7 +39,7 @@ public class HistoryRuteAdapter extends RecyclerView.Adapter<HistoryRuteAdapter.
             case "en progreso":
                 holder.textStatus.setTextAppearance(R.style.TextRowStatus_EnProgreso);
                 break;
-            case "fallida":
+            case "fallido":
                 holder.textStatus.setTextAppearance(R.style.TextRowStatus_Fallida);
                 break;
             default:
