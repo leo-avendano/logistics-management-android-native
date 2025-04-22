@@ -67,17 +67,21 @@ public class HistoryRuteAdapter extends RecyclerView.Adapter<HistoryRuteAdapter.
         private final TextView textDate;
         private final TextView textStatus;
 
+        private final TextView textCliente;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textId = itemView.findViewById(R.id.textId);
             textDate = itemView.findViewById(R.id.textDate);
             textStatus = itemView.findViewById(R.id.textStatus);
+            textCliente = itemView.findViewById(R.id.textCliente);
         }
 
         public void bind(Route item) {
             textId.setText(item.getUuid());
-            textDate.setText(item.getFechas().getInicioRepartir());
+            textDate.setText(item.getFechas().getFinRepartir());
             textStatus.setText(item.getEstado());
+            textCliente.setText(item.getCliente());
         }
     }
 }
