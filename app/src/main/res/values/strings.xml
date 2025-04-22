@@ -15,6 +15,7 @@
     <string name="apple_icon">Logo of the company Apple (A bitten apple)</string>
     <string name="howToRecover">Ingrese el email de su cuenta para recuperar la contraseña.</string>
     <string name="emailSent">Te enviamos un correo con un enlace de confirmacion! Por favor revisa tu bandeja de entrada para continuar.</string>
+    <string name="mailCooldown">Un correo de confirmación fue enviado recientemente. Esperá un momento antes de intentar nuevamente.</string>
     <string name="history_routes_uuid">%s</string>
     <string name="history_routes_date">%s</string>
     <string name="history_routes_status">%s</string>
