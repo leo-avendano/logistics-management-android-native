@@ -10,7 +10,7 @@
     <GridLayout
         android:id="@+id/nav_grid"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:columnCount="5"
         android:rowCount="1"
         android:layout_marginTop="10dp"
@@ -58,7 +58,7 @@
             android:layout_height="match_parent"
             android:layout_columnWeight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:drawableTop="@drawable/ic_settings"
+            android:drawableTop="@drawable/ic_logout"
             android:text="Logout"
             android:textColor="@color/white" />
     </GridLayout>
