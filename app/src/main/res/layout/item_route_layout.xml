@@ -3,54 +3,95 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/dot"
-            android:layout_gravity="center"
-            android:layout_marginLeft="6dp"/>
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginLeft="12dp">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-            <TextView
-                android:id="@+id/routeNameTextView"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                tools:text="Route Name" />
-
-            <TextView
-                style="@style/TextRowStatus"
-                android:id="@+id/routeStatusTextView"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginStart="20dp"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                tools:text="Status" />
+                android:src="@drawable/dot"
+                android:layout_gravity="center"
+                android:layout_marginLeft="6dp"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginLeft="12dp">
+
+                <TextView
+                    android:id="@+id/routeNameTextView"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:text="Route Name" />
+
+                <TextView
+                    style="@style/TextRowStatus"
+                    android:id="@+id/routeStatusTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="20dp"
+                    android:textSize="16sp"
+                    tools:text="Status" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/actionButton"
+                style="@style/buttonRuteDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginLeft="90dp"
+                android:textColor="@color/white"
+                tools:text="Reservar" />
+
+            <ImageView
+                android:id="@+id/expandIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_expand_more"
+                android:contentDescription="Expand/Collapse" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/actionButton"
-            style="@style/buttonRuteDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="28dp"
-            android:layout_marginLeft="90dp"
-            tools:text="Reservar" />
+        <LinearLayout
+            android:id="@+id/packageDetailsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Paquetes:"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/packagesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"/>
+
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

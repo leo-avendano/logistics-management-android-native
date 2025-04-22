@@ -14,8 +14,8 @@ public class Package {
     private String nombre;
     private String descripcion;
     private Ubicacion ubicacion;
-    private Size tamano;
-    private int peso;
+    private Tamaño tamaño;
+    private double peso;
     private String rutaRef;
 
     @Data
@@ -32,7 +32,7 @@ public class Package {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class Size {
+    public static class Tamaño {
         private int ancho;
         private int largo;
         private int alto;

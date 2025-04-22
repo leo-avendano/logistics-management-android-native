@@ -18,5 +18,10 @@
     <string name="history_routes_uuid">%s</string>
     <string name="history_routes_date">%s</string>
     <string name="history_routes_status">%s</string>
-
+    <string name="all_routes">Todas</string>
+    <string name="available">Disponible</string>
+    <string name="pending">Pendiente</string>
+    <string name="in_progress">En Progreso</string>
+    <string name="completed">Completado</string>
+    <string name="failed">Fallida</string>
 </resources>

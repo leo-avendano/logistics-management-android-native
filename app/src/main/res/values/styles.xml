@@ -42,5 +42,31 @@
         <item name="android:textSize">18sp</item>
         <item name="android:drawablePadding">8dp</item>
         <item name="android:minHeight">40dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="horizontalRadioButtonHomeScreen.Selected" parent="horizontalRadioButtonHomeScreen">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:background">@drawable/radio_button_selected</item>
+    </style>
+
+    <style name="horizontalRadioButtonHomeScreen.NoSelected" parent="horizontalRadioButtonHomeScreen">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/radio_button_unselected</item>
+    </style>
+
+    <style name="buttonRuteDetails" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingHorizontal">12dp</item>
+        <item name="android:paddingVertical">4dp</item>
+    </style>
+
+    <style name="CustomRadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/radio_button_selector</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">8dp</item>
     </style>
 </resources>

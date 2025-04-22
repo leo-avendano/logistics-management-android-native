@@ -41,10 +41,11 @@
     <LinearLayout
         android:id="@+id/linearLayoutOption"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
         android:paddingHorizontal="32dp"
         app:layout_constraintTop_toBottomOf="@id/linearLayoutTittle"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -62,44 +63,41 @@
                 android:paddingTop="2dp">
 
                 <RadioButton
-                    android:id="@+id/radioTodas"
+                    android:id="@+id/radioButtonAll"
                     style="@style/horizontalRadioButtonHomeScreen.Selected"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="Todas"
-                    tools:ignore="HardcodedText"/>
+                    android:text="@string/all_routes"
+                    android:checked="true" />
 
                 <RadioButton
-                    android:id="@+id/radioDisponible"
+                    android:id="@+id/radioButtonDisponible"
                     style="@style/horizontalRadioButtonHomeScreen.NoSelected"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Disponible"
-                    tools:ignore="HardcodedText"/>
+                    android:text="@string/available" />
 
                 <RadioButton
-                    android:id="@+id/radioPendiente"
+                    android:id="@+id/radioButtonPendiente"
                     style="@style/horizontalRadioButtonHomeScreen.NoSelected"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pendiente"
-                    tools:ignore="HardcodedText" />
+                    android:text="@string/pending" />
 
                 <RadioButton
-                    android:id="@+id/radioEnProgreso"
+                    android:id="@+id/radioButtonEnProgreso"
                     style="@style/horizontalRadioButtonHomeScreen.NoSelected"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="En Progreso"
-                    tools:ignore="HardcodedText" />
+                    android:text="@string/in_progress" />
             </RadioGroup>
         </HorizontalScrollView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewRutes"
             android:layout_width="match_parent"
-            android:layout_height="480dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="12dp"
             tools:ignore="SpeakableTextPresentCheck" />

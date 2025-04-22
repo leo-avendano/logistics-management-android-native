@@ -1,24 +1,29 @@
 package com.example.logistics_management_android_native.data.repository;
 
+import com.example.logistics_management_android_native.data.model.Package;
 import com.example.logistics_management_android_native.data.model.Route;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 public class FirebaseRouteRepository {
     private final FirebaseFirestore db;
     private final CollectionReference routesCollection;
+    private final CollectionReference packagesCollection;
 
     public FirebaseRouteRepository() {
         db = FirebaseFirestore.getInstance();
         routesCollection = db.collection("Ruta");
+        packagesCollection = db.collection("Paquete");
     }
 
     private Route documentToRoute(DocumentSnapshot document) {
@@ -43,6 +48,31 @@ public class FirebaseRouteRepository {
                 .build();
     }
 
+    private Package documentToPackage(DocumentSnapshot document) {
+        Map<String, Object> ubicacionMap = (Map<String, Object>) document.get("ubicacion");
+        Map<String, Object> tamañoMap = (Map<String, Object>) document.get("tamaño");
+
+        Package.Ubicacion ubicacion = new Package.Ubicacion();
+        ubicacion.setDeposito(((Number) ubicacionMap.get("deposito")).intValue());
+        ubicacion.setSector(((Number) ubicacionMap.get("sector")).intValue());
+        ubicacion.setEstante(((Number) ubicacionMap.get("estante")).intValue());
+
+        Package.Tamaño tamaño = new Package.Tamaño();
+        tamaño.setAncho(((Number) tamañoMap.get("ancho")).intValue());
+        tamaño.setLargo(((Number) tamañoMap.get("largo")).intValue());
+        tamaño.setAlto(((Number) tamañoMap.get("alto")).intValue());
+
+        return Package.builder()
+                .uuid(document.getId())
+                .nombre((String) document.get("nombre"))
+                .descripcion((String) document.get("descripcion"))
+                .ubicacion(ubicacion)
+                .tamaño(tamaño)
+                .peso(((Number) document.get("peso")).doubleValue())
+                .rutaRef((String) document.get("rutaRef"))
+                .build();
+    }
+
     public Task<List<Route>> getRoutesByRepartidor(String repartidorUserID, int limit) {
         return routesCollection
                 .whereEqualTo("repartidorUserID", repartidorUserID)
@@ -58,7 +88,6 @@ public class FirebaseRouteRepository {
                     return routes;
                 });
     }
-
     public Task<List<Route>> getRoutesByStatusAndRepartidor(String estado, String repartidorUserID) {
         Query query;
         if ("Todas".equals(estado)) {
@@ -105,6 +134,21 @@ public class FirebaseRouteRepository {
                         }
                     }
                     return routes;
+                });
+    }
+
+    public Task<List<Package>> getPackagesForRoute(String routeId) {
+        return packagesCollection
+                .whereEqualTo("rutaRef", routeId)
+                .get()
+                .continueWith(task -> {
+                    List<Package> packages = new ArrayList<>();
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot document : task.getResult()) {
+                            packages.add(documentToPackage(document));
+                        }
+                    }
+                    return packages;
                 });
     }
 }
