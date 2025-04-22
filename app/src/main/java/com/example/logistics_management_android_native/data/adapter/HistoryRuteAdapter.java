@@ -1,21 +1,27 @@
 package com.example.logistics_management_android_native.data.adapter;
 
 import com.example.logistics_management_android_native.R;
+
+import android.app.AlertDialog;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import com.example.logistics_management_android_native.data.model.Route;
+import com.example.logistics_management_android_native.main.HistoryRoutesFragment;
 
 public class HistoryRuteAdapter extends RecyclerView.Adapter<HistoryRuteAdapter.ViewHolder> {
     private final List<Route> routeList;
-
-    public HistoryRuteAdapter(List<Route> items) {
+    private final Context context;
+    public HistoryRuteAdapter(List<Route> items, Context context) {
         this.routeList = items;
+        this.context = context;
     }
 
     @NonNull
@@ -45,6 +51,27 @@ public class HistoryRuteAdapter extends RecyclerView.Adapter<HistoryRuteAdapter.
             default:
                 holder.textStatus.setTextAppearance(R.style.TextRowStatus);
         }
+
+        holder.btnDetails.setOnClickListener(v -> showRouteDetailsDialog(route));
+    }
+
+    private void showRouteDetailsDialog(Route route) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Detalles de la Ruta");
+        String message = "ID: " + route.getUuid() + "\n\n" +
+                "Estado: " + route.getEstado() + "\n\n" +
+                "Cliente: " + route.getCliente() + "\n\n" +
+                "Ubicación Destino:\n" +
+                " - Latitud: " + route.getDestino().getLat() + "\n" +
+                " - Longitud: " + route.getDestino().getLon() + "\n\n" +
+                "Fechas:\n" +
+                " - Inicio: " + route.getFechas().getInicioRepartir() + "\n" +
+                " - Fin: " + route.getFechas().getFinRepartir();
+        builder.setMessage(message);
+        builder.setPositiveButton("Cerrar", (dialog, which) -> dialog.dismiss());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override
@@ -64,24 +91,20 @@ public class HistoryRuteAdapter extends RecyclerView.Adapter<HistoryRuteAdapter.
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textId;
-        private final TextView textDate;
         private final TextView textStatus;
 
-        private final TextView textCliente;
+        private final Button btnDetails;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textId = itemView.findViewById(R.id.textId);
-            textDate = itemView.findViewById(R.id.textDate);
             textStatus = itemView.findViewById(R.id.textStatus);
-            textCliente = itemView.findViewById(R.id.textCliente);
+            btnDetails = itemView.findViewById(R.id.btnDetails);
         }
 
         public void bind(Route item) {
             textId.setText(item.getUuid());
-            textDate.setText(item.getFechas().getFinRepartir());
             textStatus.setText(item.getEstado());
-            textCliente.setText(item.getCliente());
         }
     }
 }

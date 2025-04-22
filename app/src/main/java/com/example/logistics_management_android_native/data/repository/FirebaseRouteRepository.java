@@ -11,6 +11,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -84,6 +85,18 @@ public class FirebaseRouteRepository {
                         for (DocumentSnapshot document : task.getResult()) {
                             routes.add(documentToRoute(document));
                         }
+
+                        routes.sort((r1, r2) -> {
+                            Map<String, Integer> priority = new HashMap<>();
+                            priority.put("en progreso", 1);
+                            priority.put("pendiente", 2);
+                            priority.put("completado", 3);
+
+                            int r1Priority = priority.getOrDefault(r1.getEstado().toLowerCase(), Integer.MAX_VALUE);
+                            int r2Priority = priority.getOrDefault(r2.getEstado().toLowerCase(), Integer.MAX_VALUE);
+
+                            return Integer.compare(r1Priority, r2Priority);
+                        });
                     }
                     return routes;
                 });

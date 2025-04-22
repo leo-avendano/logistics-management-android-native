@@ -86,6 +86,7 @@ public class AvailableRoutesFragment extends Fragment implements RouteAdapter.On
     private void setupRadioGroup() {
         radioGroupFiltro.setOnCheckedChangeListener((group, checkedId) -> {
             RadioButton selectedRadioButton = group.findViewById(checkedId);
+            updateRadioButtonStyles(checkedId);
             if (selectedRadioButton != null) {
                 currentFilter = selectedRadioButton.getText().toString();
                 loadRoutes();
@@ -168,6 +169,19 @@ public class AvailableRoutesFragment extends Fragment implements RouteAdapter.On
                     }
                 });
                 break;
+        }
+    }
+
+    private void updateRadioButtonStyles(int checkedId) {
+        for (int i = 0; i < radioGroupFiltro.getChildCount(); i++) {
+            RadioButton radioButton = (RadioButton) radioGroupFiltro.getChildAt(i);
+            if (radioButton.getId() == checkedId) {
+                radioButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
+                radioButton.setBackgroundResource(R.drawable.radio_dark_background);
+            } else {
+                radioButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.yellow));
+                radioButton.setBackgroundResource(R.drawable.radio_yellow_background);
+            }
         }
     }
 }

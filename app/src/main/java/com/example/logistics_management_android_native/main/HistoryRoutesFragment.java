@@ -45,7 +45,7 @@ public class HistoryRoutesFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         ArrayList<Route> routeList = new ArrayList<>();
-        adapter = new HistoryRuteAdapter(routeList);
+        adapter = new HistoryRuteAdapter(routeList, requireContext());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(adapter);
