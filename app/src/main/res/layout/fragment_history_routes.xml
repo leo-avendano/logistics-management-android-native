@@ -29,23 +29,13 @@
             android:layout_marginBottom="16dp"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:padding="0dp"
-                android:text="&lt;"
-                android:textColor="@android:color/black"
-                android:textSize="34sp"
-                android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/titleHistorial"
                 style="@style/TextTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="365dp"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
                 android:layout_marginLeft="24dp"
                 android:text="@string/historial_de_rutas" />
         </LinearLayout>
