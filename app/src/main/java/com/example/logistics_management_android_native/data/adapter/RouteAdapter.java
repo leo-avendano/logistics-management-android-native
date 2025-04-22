@@ -24,6 +24,7 @@ import com.example.logistics_management_android_native.data.repository.FirebaseR
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHolder> {
     private List<Route> routeList;
@@ -37,12 +38,39 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
     }
 
     public RouteAdapter(List<Route> routeList) {
-        this.routeList = routeList;
+        this.routeList = new ArrayList<>();
         this.expandedStates = new ArrayList<>();
         this.routeRepository = new FirebaseRouteRepository();
-        for (int i = 0; i < routeList.size(); i++) {
-            expandedStates.add(false);
+        filterRoutesWithPackages(routeList);
+    }
+
+    private void filterRoutesWithPackages(List<Route> routes) {
+        List<CompletableFuture<Void>> futures = new ArrayList<>();
+        
+        for (Route route : routes) {
+            CompletableFuture<Void> future = new CompletableFuture<>();
+            futures.add(future);
+            
+            routeRepository.getPackagesForRoute(route.getUuid())
+                    .addOnSuccessListener(packages -> {
+                        if (packages != null && !packages.isEmpty()) {
+                            synchronized (this) {
+                                this.routeList.add(route);
+                                this.expandedStates.add(false);
+                            }
+                        }
+                        future.complete(null);
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e("RouteAdapter", "Error checking packages for route: " + e.getMessage());
+                        future.complete(null);
+                    });
         }
+
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
+                .thenRun(() -> {
+                    notifyDataSetChanged();
+                });
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -121,7 +149,6 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
                     }
                 })
                 .addOnFailureListener(e -> {
-                    // Log error or show toast
                     Log.e("RouteAdapter", "Error loading packages: " + e.getMessage());
                 });
     }
@@ -132,12 +159,9 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
     }
 
     public void updateList(List<Route> newList) {
-        routeList = newList;
+        routeList.clear();
         expandedStates.clear();
-        for (int i = 0; i < newList.size(); i++) {
-            expandedStates.add(false);
-        }
-        notifyDataSetChanged();
+        filterRoutesWithPackages(newList);
     }
 
     static class RouteViewHolder extends RecyclerView.ViewHolder {
