@@ -1,5 +1,7 @@
 package com.example.logistics_management_android_native.auth;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -25,6 +27,8 @@ public class RecoverFragment extends Fragment {
     private ToastUtil toast;
 
     public RecoverFragment() {}
+
+    private static final long COOLDOWN_TIME_MS = 30000; // 1/2 minuto, cambiar si es necesario
 
     @Nullable
     @Override
@@ -57,10 +61,27 @@ public class RecoverFragment extends Fragment {
             return;
         }
 
+
+        SharedPreferences prefs = requireContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        long lastSentTime = prefs.getLong("last_reset_email_time", 0);
+        long currentTime = System.currentTimeMillis();
+
+        if (currentTime - lastSentTime < COOLDOWN_TIME_MS) {
+            showCooldownFragment();
+            return;
+        }
+
         FirebaseAuth.getInstance().sendPasswordResetEmail(email)
                 .addOnCompleteListener(task -> {
+
                     if (task.isSuccessful()) {
+
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putLong("last_reset_email_time", System.currentTimeMillis());
+                        editor.apply();
+
                         goToConfirmation();
+
                     } else {
                         if (task.getException() != null && task.getException().getMessage() != null) {
                             toast.showToastConcat(ToastMessage.RECOVER_FAIL, task.getException().getMessage());
@@ -96,4 +117,16 @@ public class RecoverFragment extends Fragment {
                 .addToBackStack(null)
                 .commit();
     }
+
+    private void showCooldownFragment(){
+        requireActivity().getSupportFragmentManager()
+                .popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.auth_fragment_container, new MailCooldownFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
 }
